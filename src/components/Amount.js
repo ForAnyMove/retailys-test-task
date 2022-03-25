@@ -1,14 +1,17 @@
 function Amount(props) {
     
     function getAmountOfItems(){
+        if (props.data === null || props.data.length === 0) {
+            return 'Loading...'
+        } else {
         let amount = props.data.getElementsByTagName("items")[0]
         .getElementsByTagName("item").length 
-        console.log(amount)
-        return amount
+        return 'Amount: ' + amount
+        }
     }
 
   return (
-      <div>
+      <div className="amount">
         {getAmountOfItems()} 
       </div>
   );

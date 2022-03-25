@@ -2,7 +2,7 @@ import "../styles/App.css";
 import Amount from "./Amount";
 import ProductCatalog from "./ProductCatalog";
 import {useState, useEffect} from 'react';
-
+import xhrFile from './export_full.xml';
 
 function App() {
   const [error, setError] = useState(null);
@@ -11,18 +11,17 @@ function App() {
 
   useEffect(() => {
     let xhr = new XMLHttpRequest()
-    xhr.open('GET', 'export_full.xml')
+    xhr.open('GET', xhrFile)
     xhr.send()
     xhr.onload = function() {
       if (xhr.status !== 200) {
         alert( 'Ошибка: ' + xhr.status)
-        return
+        
       }
     }
-    xhr.onprogress = (res) => {
+    xhr.onprogress = () => {
       setIsLoaded(true)
-      setItems(res)
-      console.log(res)
+      setItems(xhr.responseXML)
     }
     xhr.onerror = (error)=>{
       setIsLoaded(true)
@@ -31,14 +30,14 @@ function App() {
   }, [])
 
   if (error) {
-    return <div>Ошибка: {error}</div>;
+    return <div>Error: {error}</div>;
   } else if (!isLoaded) {
-    return <div>Загрузка...</div>;
+    return <div>Loading...</div>;
   } else {
     return (
       <div>
-        {/* <Amount data={items} /> */}
-        <ProductCatalog />
+        <Amount data={items} />
+        <ProductCatalog data={items} />
       </div>
     );
   }

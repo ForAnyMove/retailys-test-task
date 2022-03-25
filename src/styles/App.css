@@ -1,0 +1,12 @@
+.amount{
+    text-align: center;
+    font-size: 30px;
+}
+
+.catalog-container{
+    list-style: none;
+}
+
+.product-image{
+    height: 200px;
+}
