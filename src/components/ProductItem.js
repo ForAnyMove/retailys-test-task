@@ -1,5 +1,4 @@
 function ProductItem(props) {
-  let i = 0
   return (
     <li className="product">
       <h3>{props.info.name}</h3>
@@ -10,8 +9,8 @@ function ProductItem(props) {
       ></img>
       <h4>Parts:</h4>
       <ul>
-        {props.info.parts.map((item) => (
-          <li key={i++}>{item}</li>
+        {props.info.parts.map((item, index) => (
+          <li key={index}>{item}</li>
         ))}
       </ul>
     </li>
